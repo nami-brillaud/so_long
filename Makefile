@@ -6,7 +6,7 @@
 #    By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 14:41:03 by nfujisak          #+#    #+#              #
-#    Updated: 2024/06/26 14:57:01 by nfujisak         ###   ########.fr        #
+#    Updated: 2024/06/26 16:42:51 by nfujisak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,13 @@ SRCS	= samplefile.c
 
 OBJS	= $(SRCS:.c=.o)
 
-HEAD	= sampleheader.h
+HEAD	= so_long.h
 
 NAME	= so_long
 
 LIBFT	= libft/libft.a
 
-PRINTF	= printf/printf.a
-
-AR		= ar rc
+PRINTF	= printf/libftprintf.a
 
 RM		= rm -f
 
@@ -32,16 +30,15 @@ CC		= cc
 
 CFLAGS	= -Wall -Wextra -Werror
 
-all		= ${NAME}
+all:	${NAME}
 
-.c.o:
-	${CC} ${CFLAGS} -c -I ${HEAD} $< -o ${<:.c=.o}
+%.o: %.c
+	${CC} ${CFLAGS} -Imlx -I ${HEAD} -c $< -o $@
 
 ${NAME}:	${OBJS}
 	${MAKE} -C ./libft && cp ${LIBFT} ${NAME}
 	${MAKE} -C ./printf && cp ${PRINTF} ${NAME}
-	${AR} ${NAME} ${OBJS}
-	${LIB} ${NAME}
+	${CC} ${OBJS} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
 
 all: $(NAME)
 

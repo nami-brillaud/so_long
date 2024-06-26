@@ -6,14 +6,14 @@
 /*   By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:54:41 by nfujisak          #+#    #+#             */
-/*   Updated: 2024/05/13 16:17:22 by nfujisak         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:27:00 by nfujisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdarg.h>
 
 /* ft_base.c */
