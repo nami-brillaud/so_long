@@ -6,7 +6,7 @@
 #    By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 14:41:03 by nfujisak          #+#    #+#              #
-#    Updated: 2024/06/26 16:53:03 by nfujisak         ###   ########.fr        #
+#    Updated: 2024/06/26 17:01:08 by nfujisak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ ${NAME}:	${OBJS}
 	${MAKE} -C ./libft && cp ${LIBFT} ${NAME}
 	${MAKE} -C ./printf && cp ${PRINTF} ${NAME}
 	${CC} ${OBJS} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+	chmod +x ${NAME}
 
 all: $(NAME)
 
