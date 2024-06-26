@@ -6,7 +6,7 @@
 #    By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 14:41:03 by nfujisak          #+#    #+#              #
-#    Updated: 2024/06/26 16:42:51 by nfujisak         ###   ########.fr        #
+#    Updated: 2024/06/26 16:53:03 by nfujisak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,6 @@ LIBFT	= libft/libft.a
 PRINTF	= printf/libftprintf.a
 
 RM		= rm -f
-
-LIB		= ranlib
 
 CC		= cc
 
