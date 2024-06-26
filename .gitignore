@@ -1,0 +1,5 @@
+# Ignore mlx library 
+mlx/
+
+# Ignore Mac system files
+.DS_store
