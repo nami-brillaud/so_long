@@ -6,7 +6,7 @@
 #    By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 14:41:03 by nfujisak          #+#    #+#              #
-#    Updated: 2024/06/26 14:48:59 by nfujisak         ###   ########.fr        #
+#    Updated: 2024/06/26 14:57:01 by nfujisak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ AR		= ar rc
 
 RM		= rm -f
 
-LIB 	= ranlib
+LIB		= ranlib
 
 CC		= cc
 
