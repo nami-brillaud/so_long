@@ -6,11 +6,11 @@
 #    By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 14:41:03 by nfujisak          #+#    #+#              #
-#    Updated: 2024/07/04 19:40:59 by nfujisak         ###   ########.fr        #
+#    Updated: 2024/07/08 15:26:15 by nfujisak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= eventfile.c
+SRCS	= importimage.c
 
 OBJS	= $(SRCS:.c=.o)
 
