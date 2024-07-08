@@ -6,7 +6,7 @@
 /*   By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:26:16 by nfujisak          #+#    #+#             */
-/*   Updated: 2024/07/08 16:05:26 by nfujisak         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:06:16 by nfujisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int main(void)
 	while (y < num_y_repeats)
 	{
 		int x = 0;
-        while(x < num_x_repeats)
+		while(x < num_x_repeats)
 		{
-            int tex_x = x * img_width;
-            int tex_y = y * img_height;
-            mlx_put_image_to_window(mlx, mlx_window, img, tex_x, tex_y);
+        	int tex_x = x * img_width;
+        	int tex_y = y * img_height;
+        	mlx_put_image_to_window(mlx, mlx_window, img, tex_x, tex_y);
 			x++;
-        }
+		}
 		y++;
     }
 	mlx_loop(mlx);
