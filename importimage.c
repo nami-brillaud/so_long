@@ -6,7 +6,7 @@
 /*   By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:26:16 by nfujisak          #+#    #+#             */
-/*   Updated: 2024/07/08 16:00:49 by nfujisak         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:05:26 by nfujisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ int main(void)
 	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
 	
 	int num_x_repeats = (700 / img_width) + 1;
-    int num_y_repeats = (680 / img_height) + 1;
+	int num_y_repeats = (680 / img_height) + 1;
 
-    // Render the texture across the entire window
 	int y = 0;
 	while (y < num_y_repeats)
 	{
@@ -45,6 +44,4 @@ int main(void)
 	mlx_loop(mlx);
 	return (0);
 }
-
-//this only puts one image on top 
 
