@@ -6,7 +6,7 @@
 /*   By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:21:47 by nfujisak          #+#    #+#             */
-/*   Updated: 2024/07/12 19:07:23 by nfujisak         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:41:25 by nfujisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,79 +27,133 @@
 // 	return (1);
 // }
 
+int	char_count(char *line, char c)
+{
+	int	count;
+
+	count = 0;
+	while (*line != '\0')
+	{
+		if (*line++ == c)
+			count++;
+	}
+	return (count);
+}
+
+int	in_set(char *line, char *set)
+{
+	int	count;
+
+	count = 0;
+	while (*line)
+	{
+		if (ft_strchr(set, *line))
+			count++;
+		line++;
+	}
+	if (count != (int)ft_strlen(line))
+		return (NO);
+	return (OK);
+}
+
 // Function to check ber extension (works for only one file at a time and works for directory/file.ber)
 int	ber_check(char *file)
 {
     const char *extension = ft_strrchr(file, '.');
 	if (!extension)
-		return (0);
+		return (NO);
     if (!ft_strcmp(extension, ".ber"))
-        return (1);
-    return (0);
+        return (NO);
+    return (OK);
 }
 
-// //Function to check is map is rectangular using gnl
-int	rectangular_check(char	*file)
+// //Function to check is map is rectangular and contains 1 P,C, Eusing gnl
+int	rect_pce_check(char	*file, t_map *map)
 {
 	int		fd;
 	char	*line;
-	t_map	map;
-	int		i;
 
 	fd = open(file, O_RDONLY);
-	i = 0;
-	map.rcdiff = 0;
+	map->rows = 0;
+	map->rcdiff = 0;
 	line = get_next_line(fd);
 	if (!line)
-		return (0);
-	while (line && ++i)
+		return (NO);
+	while (line && ++map->rows)
 	{
-		if (i == 1)
-			map.columns = ft_strlen(line);
-		else if ((int)ft_strlen(line) != map.columns)
-			map.rcdiff = 1;
-		ft_printf("map columns %d\n", map.columns);
-		ft_printf("line length %d\n", ft_strlen(line));
-		free(line); //grouping the free
+		if (map->rows == 1)
+			map->cols = ft_strlen(line);
+		else if ((int)ft_strlen(line) != map->cols)
+			map->rcdiff = 1;
+		map->p += char_count(line, 'P');
+		map->c += char_count(line, 'C');
+		map->e += char_count(line, 'E');
+		map->x += char_count(line, 'X');
+		ft_printf("line number %d: %s\n", map->rows, line);
+		ft_printf("number of e is %d\n", map->e);
+		free(line);
 		line = get_next_line(fd);
 	}
-	if (map.rcdiff == 1)
-		return (0);
-	return (1);
+	if (map->rcdiff == 1 || map->p != 1 || map->c < 1 || map->e != 1)
+		return (NO);
+	return (OK);
 }
 
+//Questions: ERROR CODES, DOES MAP COME FROM INIT GAME, WHERE TO CLOSE, WHERE TO FREE.
+// what about file opening errors
+//Initial checking function
 
-// my old code
-// 	line = get_next_line(fd);
-// 	if (!line)
-// 		return (0);
-// 	i = 1;
-// 	map.width = ft_strlen(line);
-// 	while (line)
-// 	{
-// 		if (map.width != (int)ft_strlen(line))
-// 		{
-// 			free(line);
-// 			ft_printf("map width is %d\n", map.width);
-// 			ft_printf("current line length is is %d\n", (int)ft_strlen(line));
-// 			return (0);
-// 		}
-// 		free(line);
-// 		line = get_next_line(fd);
-// 		i++;
-// 		ft_printf("i is %d\n", i);
-// 	}
-// 	return (1);
+int	map_error(int n)
+{
+	if (n == 2)
+		ft_printf("Error: Invalid file! \n");
+	if (n == 3)
+		ft_printf("Error: Invalid map! \n");
+	return (NO);
+}
+
+int	validate_map(char *file, t_map *map)
+{
+	int		fd;
+	int		error;
+	char	*line;
+	int		i;
+
+	error = 0;
+	if (!file || ber_check(file))
+		error = 2;
+	if (rect_pce_check(file, map))
+		error = 3;
+	i = 0;
+	fd = open(file, O_RDONLY);
+	line = get_next_line(fd);
+	while (line && ++i) //i is rows.
+	{
+		if ((i == 1 || i == map->rows) && !(in_set(line, "1")))
+			error = 3;
+		if (line[0] != '1' || line[map->cols - 1] != '1' || !in_set(line, "10CEPX"))
+			error = 3;
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (error > 0)
+		return (map_error(error));
+	return (OK);
+}
+// int	validate_map(char *file)
+// {
+// 	if (!ber_check)
+// 		//return error with error code
+// 	if (!rect_pce_check)
+// 		//return error with error code
+
 // }
-
-// int	ecp_check(char *file) to do here, its the same logic 
-// where should i close the file ? (btw a close fd should be before a return !!)
-
-// you need to check somewhere if there are more or equal than 3 rows (or else its not a rectangle)
-
-//Function to check if 1 exit, 1 collectible and 1 position -> nope if one is incorrect - TO DO 
-
-//You need a function to exit and printf errors when the map has an issue (see pdf). use perror and sterror
+//remaining :
+//initial function  - if surrounded by walls + if all chars are either 10CEP with in set
+// error messages (where?)
+// -- where should i close the file ? (btw a close fd should be before a return))
+//You need a function to exit and printf errors when the map has an issue (see pdf)
+// but idk the expectations of that.
 
 //We'll do the parsing later on.
 //Valid map (entry - exit
@@ -110,12 +164,19 @@ int	rectangular_check(char	*file)
 /* !!!!! Testing mains are here !!!!! */
 int main ()
 {
-	char *map = "./maps/valid/02_test.ber";
-	if (!rectangular_check(map))
-		ft_printf("Map invalid\n");
-	else
-		ft_printf("Map is totally valid \n");
-	return (0);
+	char file[] = "./maps/valid/02_test.ber";
+	t_game	*game = (t_game *)malloc(sizeof(t_game)); //dont forget to allocate memory to the pointer structure !!
+	
+	if (!game)
+	{
+		ft_printf("Malloc fail \n");
+		return (NO);
+	}
+	init_game(game);
+	if (validate_map(file, &game->map) == 0)
+		ft_printf("Map is valid! \n");
+	free (game);
+	return (OK);
 }
 
 

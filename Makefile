@@ -6,11 +6,11 @@
 #    By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/26 14:41:03 by nfujisak          #+#    #+#              #
-#    Updated: 2024/07/12 19:22:37 by nfujisak         ###   ########.fr        #
+#    Updated: 2024/07/15 16:45:18 by nfujisak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= map_check.c gnl/get_next_line.c gnl/get_next_line_utils.c
+SRCS	= map_check.c init_game.c gnl/get_next_line.c gnl/get_next_line_utils.c
 
 OBJS	= $(SRCS:.c=.o)
 
