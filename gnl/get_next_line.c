@@ -6,7 +6,7 @@
 /*   By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:51:29 by nfujisak          #+#    #+#             */
-/*   Updated: 2024/07/12 19:30:53 by nfujisak         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:29:11 by nfujisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*read_file(int fd, char *stash)
 	int		chars_read;
 
 	chars_read = 1;
-	while (!newline_check(stash) && chars_read != 0)
+	while (!check_newline(stash) && chars_read != 0)
 	{
 		buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 		if (!buffer)
@@ -108,6 +108,7 @@ char	*get_next_line(int fd)
 	stash = save;
 	line = fetch_line(stash);
 	stash = handle_remains(stash, line);
+	remove_newline(line);
 	return (line);
 }
 

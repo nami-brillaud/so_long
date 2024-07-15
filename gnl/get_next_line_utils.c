@@ -6,7 +6,7 @@
 /*   By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:54:16 by nfujisak          #+#    #+#             */
-/*   Updated: 2024/07/12 16:54:30 by nfujisak         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:30:37 by nfujisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*gnl_strjoin(char *stash, char *buffer)
 	return (free(stash), free(buffer), save);
 }
 
-char	*newline_check(char *stash)
+char	*check_newline(char *stash)
 {
 	int	i;
 
@@ -51,4 +51,13 @@ char	*newline_check(char *stash)
 		i++;
 	}
 	return (NULL);
+}
+
+void	remove_newline(char *line)
+{
+	int	len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
 }

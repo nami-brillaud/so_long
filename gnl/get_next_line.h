@@ -6,7 +6,7 @@
 /*   By: nfujisak <nfujisak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:52:43 by nfujisak          #+#    #+#             */
-/*   Updated: 2024/07/12 19:22:53 by nfujisak         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:29:32 by nfujisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*get_next_line(int fd);
 
 /* get_next_line_utils.c */
 char	*gnl_strjoin(char *stash, char *buffer);
-char	*newline_check(char *stash);
+char	*check_newline(char *stash);
+void	remove_newline(char *line);
 
 #endif
